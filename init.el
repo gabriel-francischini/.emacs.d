@@ -7,9 +7,11 @@
 (add-to-list 'package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
 	("marmalade" . "http://marmalade-repo.org/packages/")
-	("melpa" . "http://melpa.milkbox.net/packages/"))
+	("melpa-milkbox" . "http://melpa.milkbox.net/packages/"))
       t)
 
+(add-to-list 'package-archives
+    '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 (package-initialize)
 
@@ -111,6 +113,28 @@
 (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 
 
+;; Use neotree as file explorer
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+;; Activate all-the-icons to use with neotree
+(require 'all-the-icons)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+;; Use spaceline from SpaceEmacs (powered by powerline)
+(require 'powerline)
+(powerline-nano-theme)
+(require 'spaceline-config)
+(spaceline-spacemacs-theme)
+(use-package spaceline-all-the-icons
+  :after spaceline
+  :config (spaceline-all-the-icons-theme))
+(spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
+(spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
+(spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
+(spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
+
+
 ;; function-args
 ;; (require 'function-args)
 ;; (fa-config-default)
@@ -189,7 +213,7 @@
     ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
  '(package-selected-packages
    (quote
-    (cyberpunk-theme monokai-theme zenburn-theme zygospore iedit counsel-projectile anzu comment-dwim-2 ws-butler dtrt-indent clean-aindent-mode yasnippet undo-tree volatile-highlights helm-gtags helm-projectile helm-swoop zygospore projectile use-package color-theme-zenburn ggtags helm company-c-headers company darcula-theme atom-one-dark-theme)))
+    (all-the-icons-ivy neotree fancy-battery spaceline-all-the-icons spaceline cyberpunk-theme monokai-theme zenburn-theme zygospore iedit counsel-projectile anzu comment-dwim-2 ws-butler dtrt-indent clean-aindent-mode yasnippet undo-tree volatile-highlights helm-gtags helm-projectile helm-swoop zygospore projectile use-package color-theme-zenburn ggtags helm company-c-headers company darcula-theme atom-one-dark-theme)))
  '(pdf-view-midnight-colors (quote ("#DCDCCC" . "#383838")))
  '(pos-tip-background-color "#FFFACE")
  '(pos-tip-foreground-color "#272822")
