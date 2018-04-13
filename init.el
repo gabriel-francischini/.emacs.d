@@ -42,6 +42,9 @@
 ;; Set apropos order in a more convenient order
 (setq apropos-sort-by-scores t)
 
+;; Disables auto-backuping (./~files.extension)
+(setq make-backup-files nil)
+
 ;; For C++ better usage
 (require 'company)
 (add-hook 'after-init-hook 'company-mode)
@@ -52,6 +55,9 @@
 
 (add-to-list 'company-backends 'company-c-headers)
 
+
+;; Change C/C++ tabs to 4 spaces
+(setq c-basic-offset 4)
 
 ;; `Semantic` autocompletion-by-context
 (require 'cc-mode)
