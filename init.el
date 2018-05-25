@@ -59,6 +59,9 @@
 ;; Change C/C++ tabs to 4 spaces
 (setq c-basic-offset 4)
 
+;; Hotkey to indent command
+(global-set-key (kbd "C-c TAB") 'c-indent-command)
+
 ;; `Semantic` autocompletion-by-context
 (require 'cc-mode)
 (require 'semantic)
