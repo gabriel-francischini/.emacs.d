@@ -45,6 +45,10 @@
 ;; Disables auto-backuping (./~files.extension)
 (setq make-backup-files nil)
 
+;; Set up magit hotkeys
+(require 'magit)
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; For C++ better usage
 (require 'company)
 (add-hook 'after-init-hook 'company-mode)
