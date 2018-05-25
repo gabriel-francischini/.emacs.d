@@ -140,6 +140,27 @@
 (spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
 (spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
 
+;; DO WARN ABOUT SUPERUSER/ROOT EDITING
+(defface find-file-root-header-face
+  '((t (:foreground "white" :background "red3")))
+  "*Face use to display header-lines for files opened as root.")
+
+(defun find-file-root-header-warning ()
+  "*Display a warning in header line of the current buffer.
+This function is suitable to add to `find-file-hook'."
+  (when (string-equal
+         (file-remote-p (or buffer-file-name default-directory) 'user)
+         "root")
+    (let* ((warning "WARNING: EDITING FILE AS ROOT!")
+           (space (+ 6 (- (window-width) (length warning))))
+           (bracket (make-string (/ space 2) ?-))
+           (warning (concat bracket warning bracket)))
+      (setq header-line-format
+            (propertize  warning 'face 'find-file-root-header-face)))))
+
+(add-hook 'find-file-hook 'find-file-root-header-warning)
+(add-hook 'dired-mode-hook 'find-file-root-header-warning)
+
 
 ;; function-args
 ;; (require 'function-args)
