@@ -57,6 +57,9 @@
 (global-set-key (kbd "C-'") #'aya-expand)
 (global-set-key (kbd "C-M-'") #'aya-open-line)
 
+;; Setup .pro files to be in mode qt-pro-mode
+(add-to-list 'auto-mode-alist '("\\.pro\\'" . qt-pro-mode))
+
 ;; For C++ better usage
 (require 'company)
 (add-hook 'after-init-hook 'company-mode)
