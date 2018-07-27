@@ -176,6 +176,14 @@ This function is suitable to add to `find-file-hook'."
 (add-hook 'find-file-hook 'find-file-root-header-warning)
 (add-hook 'dired-mode-hook 'find-file-root-header-warning)
 
+;; Use ledger mode
+(require 'ledger-mode)
+(autoload 'ledger-mode "ledger-mode" "A major mode for Ledger" t)
+(add-to-list 'load-path
+             (expand-file-name "/path/to/ledger/source/lisp/"))
+(add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
+
+
 
 ;; function-args
 ;; (require 'function-args)
