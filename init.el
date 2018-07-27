@@ -4,7 +4,10 @@
 (add-to-list 'package-archives
       '(("gnu" . "http://elpa.gnu.org/packages/")
 	("marmalade" . "http://marmalade-repo.org/packages/")
-	("melpa-milkbox" . "http://melpa.milkbox.net/packages/"))
+	("melpa-milkbox" . "http://melpa.milkbox.net/packages/")
+    ("melpa" . "https://melpa.org/packages/")
+    ("melpa-stable" . "https://stable.melpa.org/packages/")
+    )
       t)
 
 (add-to-list 'package-archives
