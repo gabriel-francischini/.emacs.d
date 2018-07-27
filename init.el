@@ -52,6 +52,11 @@
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; Setup Auto Yasnippets - https://github.com/abo-abo/auto-yasnippet
+(global-set-key (kbd "C-\"") #'aya-create)
+(global-set-key (kbd "C-'") #'aya-expand)
+(global-set-key (kbd "C-M-'") #'aya-open-line)
+
 ;; For C++ better usage
 (require 'company)
 (add-hook 'after-init-hook 'company-mode)
