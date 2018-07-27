@@ -45,8 +45,9 @@
 ;; Set apropos order in a more convenient order
 (setq apropos-sort-by-scores t)
 
-;; Disables auto-backuping (./~files.extension)
-(setq make-backup-files nil)
+;; Disables autosaving AND backup files
+(setq make-backup-files nil) ; stop creating backup~ files
+(setq auto-save-default nil) ; stop creating #autosave# files
 
 ;; Set up magit hotkeys
 (require 'magit)
