@@ -73,6 +73,9 @@
 ;; Setup .pro files to be in mode qt-pro-mode
 (add-to-list 'auto-mode-alist '("\\.pro\\'" . qt-pro-mode))
 
+;; Choose the Java indenting style for C-like modes
+(setq c-default-style "java")
+
 ;; For C++ better usage
 (require 'company)
 (add-hook 'after-init-hook 'company-mode)
