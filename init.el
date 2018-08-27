@@ -115,6 +115,8 @@
 (define-key helm-gtags-mode-map (kbd "C-c <") 'helm-gtags-previous-history)
 (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 
+;; Always activate undo-tree-mode because of redo (M-_)
+(add-hook 'find-file-hook #'undo-tree-mode)
 
 ;; Use neotree as file explorer
 (require 'neotree)
