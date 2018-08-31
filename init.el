@@ -68,7 +68,7 @@
 (setq zone-programs [zone-pgm-putz-with-case zone-pgm-whack-chars zone-pgm-five-oclock-swan-dive zone-pgm-rotate-LR-lockstep zone-pgm-paragraph-spaz zone-pgm-random-life])
 
 ;; Set zone timer
-(zone-when-idle 120)
+(zone-when-idle 1200)
 
 ;; Setup .pro files to be in mode qt-pro-mode
 (add-to-list 'auto-mode-alist '("\\.pro\\'" . qt-pro-mode))
