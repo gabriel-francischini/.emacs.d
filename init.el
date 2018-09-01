@@ -62,9 +62,6 @@
 ;; ZONE it!
 (require 'zone)
 
-;; load the packaged named zone-select.
-(load "zone-select") ;; best not to include the ending “.el” or “.elc”
-
 ;; Limit available zone transitions
 (setq zone-programs [zone-pgm-putz-with-case zone-pgm-whack-chars zone-pgm-five-oclock-swan-dive zone-pgm-rotate-LR-lockstep zone-pgm-paragraph-spaz zone-pgm-random-life])
 
