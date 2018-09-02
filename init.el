@@ -27,6 +27,13 @@
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 
+;; Changes behaviour of C-v and M-v and alike
+(setq next-screen-context-lines 20)
+;; Remove the scrollbar, menu and tool bar
+(scroll-bar-mode -1)
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+
 (require 'setup-general)
 (if (version< emacs-version "24.4")
     (require 'setup-ivy-counsel)
