@@ -66,6 +66,10 @@
 (global-set-key (kbd "C-'") #'aya-expand)
 (global-set-key (kbd "C-M-'") #'aya-open-line)
 
+;; Sets the 80-column header
+(require 'fill-column-indicator)
+(set-fill-column 80)
+
 ;; ZONE it!
 (require 'zone)
 
@@ -156,6 +160,7 @@
 
 ;; Always activate undo-tree-mode because of redo (M-_)
 (add-hook 'find-file-hook #'undo-tree-mode)
+(add-hook 'prog-mode-hook #'fci-mode)
 
 ;; Use neotree as file explorer
 (require 'neotree)
