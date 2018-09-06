@@ -180,17 +180,21 @@
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; Use spaceline from SpaceEmacs (powered by powerline)
-(require 'powerline)
-(powerline-nano-theme)
-(require 'spaceline-config)
-(spaceline-spacemacs-theme)
-(use-package spaceline-all-the-icons
-  :after spaceline
-  :config (spaceline-all-the-icons-theme))
-(spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
-(spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
-(spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
-(spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
+;; (require 'powerline)
+;; (powerline-nano-theme)
+;; (require 'spaceline-config)
+;; (spaceline-spacemacs-theme)
+;; (use-package spaceline-all-the-icons
+;;   :after spaceline
+;;   :config (spaceline-all-the-icons-theme))
+;; (spaceline-all-the-icons--setup-anzu)            ;; Enable anzu searching
+;; (spaceline-all-the-icons--setup-package-updates) ;; Enable package update indicator
+;; (spaceline-all-the-icons--setup-git-ahead)       ;; Enable # of commits ahead of upstream in git
+;; (spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
+
+;; Use doom-modeline
+(require 'doom-modeline)
+(doom-modeline-init)
 
 ;; DO WARN ABOUT SUPERUSER/ROOT EDITING
 (defface find-file-root-header-face
