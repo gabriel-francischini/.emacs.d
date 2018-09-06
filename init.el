@@ -224,4 +224,14 @@ This function is suitable to add to `find-file-hook'."
              (expand-file-name "/path/to/ledger/source/lisp/"))
 (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
 
+;; Use rainbow-delimiters and rainbow-identifiers
+(require 'rainbow-identifiers)
+(add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
+(require 'rainbow-delimiters)
+(add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'lisp-interaction-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'scheme-mode-hook 'rainbow-delimiters-mode)
+(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
+
 (put 'erase-buffer 'disabled nil)
