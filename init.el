@@ -41,6 +41,9 @@
   (push-mark (point) t nil)
   (message "Pushed mark to ring"))
 
+;; Echo keys almost instantly
+(setq echo-keystrokes 1.0E-50)
+
 (global-set-key (kbd "C-h C-SPC") 'push-mark-no-activate)
 
 ;; Better way to clear eshell
