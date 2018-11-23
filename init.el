@@ -43,6 +43,15 @@
 
 (global-set-key (kbd "C-h C-SPC") 'push-mark-no-activate)
 
+;; Better way to clear eshell
+(defun eshell-erase-buffer ()
+  "Clear `eshell' buffer, comint-style."
+  (interactive)
+  (let ((input (eshell-get-old-input)))
+    (eshell/clear-scrollback)
+    (eshell-emit-prompt)
+    (insert input)))
+
 (require 'setup-general)
 (if (version< emacs-version "24.4")
     (require 'setup-ivy-counsel)
