@@ -169,7 +169,25 @@
 
 ;; Always activate undo-tree-mode because of redo (M-_)
 (add-hook 'find-file-hook #'undo-tree-mode)
-(add-hook 'prog-mode-hook #'fci-mode)
+
+(defun set-limit-column-ruler (&optional column)
+  "Creates a ruler to the right of the screen at column COLUMN.
+It's main purpouse is to be a visual cue so you will know when your
+lines have gone too far."
+  (unless column (setq column 80))
+  (set-fill-column column)
+  (turn-on-fci-mode))
+
+(defun set-lisp-limit-column-ruler ()
+  "By Google's Lisp Style convention, ruler is at column 100."
+  (set-limit-column-ruler 100))
+
+(add-hook 'prog-mode-hook #'set-limit-column-ruler)
+(add-hook 'lisp-mode-hook #'set-lisp-limit-column-ruler)
+(add-hook 'lisp-interaction-mode-hook #'set-lisp-limit-column-ruler)
+(add-hook 'emacs-lisp-mode-hook #'set-lisp-limit-column-ruler)
+(add-hook 'scheme-mode-hook #'set-lisp-limit-column-ruler)
+(add-hook 'clojure-mode-hook #'set-lisp-limit-column-ruler)
 
 ;; Use neotree as file explorer
 (require 'neotree)
