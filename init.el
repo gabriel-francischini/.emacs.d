@@ -65,6 +65,7 @@
 ;; Disables autosaving AND backup files
 (setq make-backup-files nil) ; stop creating backup~ files
 (setq auto-save-default nil) ; stop creating #autosave# files
+(setq create-lockfiles nil) ; stop creating # files
 
 ;; Set up magit hotkeys
 (require 'magit)
