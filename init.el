@@ -250,4 +250,22 @@ This function is suitable to add to `find-file-hook'."
    (define-key paredit-mode-map (kbd "C-c <left>") 'paredit-backward-slurp-sexp)
    (define-key paredit-mode-map (kbd "C-c <right>") 'paredit-backward-barf-sexp)))
 
+;; Unbind slime's keybind's hijacking
+(defun override-slime ()
+  (define-key slime-repl-mode-map
+    (read-kbd-macro paredit-backward-delete-key) nil)
+  (define-key slime-repl-mode-map (kbd "M-_") nil)
+  (define-key slime-mode-indirect-map (kbd "M-_") nil)
+  (define-key undo-tree-map (kbd "M-_") 'undo-tree-redo))
+
+(eval-after-load "slime-mode"
+  '(define-key slime-mode-indirect-map (kbd "M-_") nil))
+
+(add-hook 'slime-repl-mode-hook 'override-slime)
+
+;; Properly configure slime contribs
+(require 'slime-autoloads)
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(add-to-list 'slime-contribs 'slime-indentation)
+
 (put 'erase-buffer 'disabled nil)
