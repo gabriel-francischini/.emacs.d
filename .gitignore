@@ -1,0 +1,11 @@
+# Don't put neither compiled files nor temporary files
+*.elc
+*~
+\#*\#
+
+# Don't commit cache files
+*.cache
+
+semanticdb/*
+url/*
+eshell/*
