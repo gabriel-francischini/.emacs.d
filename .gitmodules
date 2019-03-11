@@ -1,0 +1,3 @@
+[submodule "custom/company-qml"]
+	path = custom/company-qml
+	url = https://github.com/cute-jumper/company-qml
