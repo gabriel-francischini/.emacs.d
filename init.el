@@ -331,3 +331,15 @@ This function is suitable to add to `find-file-hook'."
 (add-to-list 'slime-contribs 'slime-indentation)
 
 (put 'erase-buffer 'disabled nil)
+
+(setq org-startup-indented t
+      org-bullets-bullet-list '(" ") ;; no bullets, needs org-bullets package
+      org-ellipsis "  " ;; folding symbol
+      org-pretty-entities t
+      org-hide-emphasis-markers t
+      ;; show actually italicized text instead of /italicized text/
+      org-agenda-block-separator ""
+      org-fontify-whole-heading-line t
+      org-fontify-done-headline t
+      org-fontify-quote-and-verse-blocks t)
+
