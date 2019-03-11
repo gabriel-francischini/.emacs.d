@@ -41,10 +41,12 @@
 ;; (define-key c++-mode-map  [(control tab)] 'company-complete)
 
 ;; Package: projejctile
-(use-package projectile
-  :init
-  (projectile-global-mode)
-  (setq projectile-enable-caching t))
+(add-hook 'c-mode-hook
+	  (lambda ()
+	    (use-package projectile
+	      :init
+	      (projectile-global-mode)
+	      (setq projectile-enable-caching t))))
 
 ;; Package zygospore
 (use-package zygospore

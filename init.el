@@ -58,14 +58,21 @@
     (eshell-emit-prompt)
     (insert input)))
 
+(use-package helm)
+(use-package company)
+(add-hook 'after-init-hook 'company-mode)
 (require 'setup-general)
-(if (version< emacs-version "24.4")
-    (require 'setup-ivy-counsel)
-  (require 'setup-helm)
-  (require 'setup-helm-gtags))
-;; (require 'setup-ggtags)
-(require 'setup-cedet)
+(require 'setup-helm)
 (require 'setup-editing)
+
+
+(add-hook 'c-mode-hook
+          (lambda ()
+            (if (version< emacs-version "24.4")
+                (require 'setup-helm-gtags))
+            (require 'setup-ivy-counsel)
+            ;; (require 'setup-ggtags)
+            (require 'setup-cedet)))
 
 ;; For line numbering
 (add-hook 'after-init-hook 'global-linum-mode)
@@ -127,26 +134,32 @@
 ;; Setup .pro files to be in mode qt-pro-mode
 (add-to-list 'auto-mode-alist '("\\.pro\\'" . qt-pro-mode))
 
-;; Setup QML autocompletion
-(require 'company-qml)
-(add-to-list 'company-backends 'company-qml)
 
-;; Add newer Qt versions QML types
-(mapc (lambda (x) (add-to-list 'company-qml-extra-qmltypes-files x))
-      (directory-files-recursively qt-version-dir "\.qmltypes$" ))
+(add-hook 'qml-mode-hook
+          (lambda ()
+            ;; Setup QML autocompletion
+            (require 'company-qml)
+            (add-to-list 'company-backends 'company-qml)
+
+            ;; Add newer Qt versions QML types
+            (mapc (lambda (x)
+                    (add-to-list 'company-qml-extra-qmltypes-files x))
+                  (directory-files-recursively qt-version-dir "\.qmltypes$" ))
+            (company-mode)))
+
 
 ;; Choose the Java indenting style for C-like modes
 (setq c-default-style "java")
 
 ;; For C++ better usage
-(require 'company)
-(add-hook 'after-init-hook 'company-mode)
+(add-hook 'c-mode-hook
+	  (lambda ()
+	    (setq company-backends (delete 'company-semantic company-backends))
+	    (define-key c-mode-map  [(tab)] 'company-complete)
+	    (define-key c++-mode-map  [(tab)] 'company-complete)
 
-(setq company-backends (delete 'company-semantic company-backends))
-(define-key c-mode-map  [(tab)] 'company-complete)
-(define-key c++-mode-map  [(tab)] 'company-complete)
-
-(add-to-list 'company-backends 'company-c-headers)
+	    (add-to-list 'company-backends 'company-c-headers)
+        (company-mode)))
 
 
 ;; Change C/C++ tabs to 4 spaces
@@ -156,8 +169,8 @@
 (global-set-key (kbd "C-c TAB") 'c-indent-command)
 
 ;; `Semantic` autocompletion-by-context
-(require 'cc-mode)
-(require 'semantic)
+(use-package cc-mode)
+(use-package semantic)
 
 (global-semanticdb-minor-mode 1)
 (global-semantic-idle-scheduler-mode 1)
@@ -166,7 +179,7 @@
 
 
 ;; Gtags for ... tags?
-(require 'ggtags)
+(use-package ggtags)
 (add-hook 'c-mode-common-hook
           (lambda ()
             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode 'asm-mode)
@@ -196,7 +209,7 @@
  helm-gtags-suggested-key-mapping t
  )
 
-(require 'helm-gtags)
+(use-package helm-gtags)
 ;; Enable helm-gtags-mode
 (add-hook 'dired-mode-hook 'helm-gtags-mode)
 (add-hook 'eshell-mode-hook 'helm-gtags-mode)
@@ -234,7 +247,7 @@ lines have gone too far."
 (add-hook 'clojure-mode-hook #'set-lisp-limit-column-ruler)
 
 ;; Use neotree as file explorer
-(require 'neotree)
+(use-package neotree)
 (global-set-key [f8] 'neotree-toggle)
 
 ;; Activate all-the-icons to use with neotree
@@ -255,7 +268,7 @@ lines have gone too far."
 ;; (spaceline-all-the-icons--setup-neotree)         ;; Enable Neotree mode line
 
 ;; Use doom-modeline
-(require 'doom-modeline)
+(use-package doom-modeline)
 (doom-modeline-init)
 
 ;; DO WARN ABOUT SUPERUSER/ROOT EDITING
@@ -280,16 +293,16 @@ This function is suitable to add to `find-file-hook'."
 (add-hook 'dired-mode-hook 'find-file-root-header-warning)
 
 ;; Use ledger mode
-(require 'ledger-mode)
+(use-package ledger-mode)
 (autoload 'ledger-mode "ledger-mode" "A major mode for Ledger" t)
 (add-to-list 'load-path
              (expand-file-name "/path/to/ledger/source/lisp/"))
 (add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
 
 ;; Use rainbow-delimiters and rainbow-identifiers
-(require 'rainbow-identifiers)
+(use-package rainbow-identifiers)
 (add-hook 'prog-mode-hook 'rainbow-identifiers-mode)
-(require 'rainbow-delimiters)
+(use-package rainbow-delimiters)
 (add-hook 'lisp-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'lisp-interaction-mode-hook 'rainbow-delimiters-mode)
 (add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
@@ -297,16 +310,17 @@ This function is suitable to add to `find-file-hook'."
 (add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
 
 
-(require 'paredit)
+(use-package paredit)
+
 
 (autoload 'enable-paredit-mode "paredit" "Turn on pseudo-structural editing of Lisp code." t)
-(add-hook 'emacs-lisp-mode-hook       #'enable-paredit-mode)
-;;(add-hook 'eval-expression-minibuffer-setup-hook #'enable-paredit-mode)
-;;(add-hook 'ielm-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-mode-hook             #'enable-paredit-mode)
-(add-hook 'lisp-interaction-mode-hook #'enable-paredit-mode)
-(add-hook 'scheme-mode-hook           #'enable-paredit-mode)
-(add-hook 'clojure-mode-hook #'enable-paredit-mode)
+(add-hook 'emacs-lisp-mode-hook       'paredit-mode)
+;;(add-hook 'eval-expression-minibuffer-setup-hook 'paredit-mode)
+;;(add-hook 'ielm-mode-hook             'paredit-mode)
+(add-hook 'lisp-mode-hook             'paredit-mode)
+(add-hook 'lisp-interaction-mode-hook 'paredit-mode)
+(add-hook 'scheme-mode-hook           'paredit-mode)
+(add-hook 'clojure-mode-hook 'paredit-mode)
 (add-hook
  'paredit-mode-hook
  (lambda ()

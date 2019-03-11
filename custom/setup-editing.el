@@ -39,6 +39,7 @@
 
 ;; Package: volatile-highlights
 ;; GROUP: Editing -> Volatile Highlights
+;;    Minor mode for visual feedback on some operations.
 (use-package volatile-highlights
   :init
   (volatile-highlights-mode t))
@@ -64,17 +65,24 @@
   (add-hook 'prog-mode-hook 'clean-aindent-mode))
 
 ;; Package: dtrt-indent
+;; dtrt-mode:
+;;   An Emacs minor mode that guesses the indentation offset originally
+;;   used for creating source code files and transparently adjusts the
+;;   corresponding settings in Emacs, making it more convenient to edit foreign files.
 (use-package dtrt-indent
   :init
   (dtrt-indent-mode 1)
   (setq dtrt-indent-verbosity 0))
 
 ;; Package: ws-butler
+;; ws-butler -- an unobtrusive way to trim spaces from end of line
 (use-package ws-butler
   :init
   (add-hook 'prog-mode-hook 'ws-butler-mode)
   (add-hook 'text-mode 'ws-butler-mode)
   (add-hook 'fundamental-mode 'ws-butler-mode))
+(require 'ws-butler)
+(add-hook 'prog-mode-hook #'ws-butler-mode)
 
 ;; PACKAGE: comment-dwim-2
 (use-package comment-dwim-2
@@ -83,6 +91,7 @@
 
 ;; PACKAGE: anzu
 ;; GROUP: Editing -> Matching -> Isearch -> Anzu
+;; Anzu shows completion hints while in minibuffer
 (use-package anzu
   :init
   (global-anzu-mode)
@@ -90,6 +99,8 @@
   (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp))
 
 ;; PACKAGE: iedit
+;; Iedit uses C-; and C-' to see/edit multiple occurences of a string/symbol
+;; Very similar to Sublime's multiple cursors
 (use-package iedit
   :bind (("C-;" . iedit-mode))
   :init
