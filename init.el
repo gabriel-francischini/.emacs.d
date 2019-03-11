@@ -106,8 +106,31 @@
 ;; Set zone timer
 (zone-when-idle 1200)
 
+;; Sets Qt's home
+(defvar qt-home-dir
+  (if (eq system-type 'windows-nt) "C:/Qt/" "~/Qt/"))
+
+;; Sets current Qt version
+(defvar qt-version "5.12.0/")
+
+;; Sets current Qt toolchain home
+(defvar qt-version-dir
+  (concat qt-home-dir
+          qt-version
+          (if (eq system-type 'windows-nt) ; Add compiler toolchain
+              "msvc/"
+            "gcc_64/")))
+
 ;; Setup .pro files to be in mode qt-pro-mode
 (add-to-list 'auto-mode-alist '("\\.pro\\'" . qt-pro-mode))
+
+;; Setup QML autocompletion
+(require 'company-qml)
+(add-to-list 'company-backends 'company-qml)
+
+;; Add newer Qt versions QML types
+(mapc (lambda (x) (add-to-list 'company-qml-extra-qmltypes-files x))
+      (directory-files-recursively qt-version-dir "\.qmltypes$" ))
 
 ;; Choose the Java indenting style for C-like modes
 (setq c-default-style "java")
