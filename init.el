@@ -96,7 +96,12 @@
 (require 'zone)
 
 ;; Limit available zone transitions
-(setq zone-programs [zone-pgm-putz-with-case zone-pgm-whack-chars zone-pgm-five-oclock-swan-dive zone-pgm-rotate-LR-lockstep zone-pgm-paragraph-spaz zone-pgm-random-life])
+(setq zone-programs
+      [zone-pgm-putz-with-case
+       zone-pgm-whack-chars
+       zone-pgm-five-oclock-swan-dive
+       zone-pgm-rotate-LR-lockstep
+       zone-pgm-paragraph-spaz])
 
 ;; Set zone timer
 (zone-when-idle 1200)
