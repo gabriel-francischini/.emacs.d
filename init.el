@@ -24,6 +24,7 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 (require 'iso-transl)
+(require 'windmove) ; For S-<arrow keys> window moving
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 (let ((default-directory  "~/.emacs.d/custom/"))
