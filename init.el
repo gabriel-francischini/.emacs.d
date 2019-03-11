@@ -26,6 +26,8 @@
 (require 'iso-transl)
 
 (add-to-list 'load-path "~/.emacs.d/custom")
+(let ((default-directory  "~/.emacs.d/custom/"))
+  (normal-top-level-add-subdirs-to-load-path))
 
 ;; Changes behaviour of C-v and M-v and alike
 (setq next-screen-context-lines 20)
