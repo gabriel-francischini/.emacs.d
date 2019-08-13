@@ -70,7 +70,7 @@
           (lambda ()
             (if (version< emacs-version "24.4")
                 (require 'setup-helm-gtags))
-            (require 'setup-ivy-counsel)
+            ;; (require 'setup-ivy-counsel)
             ;; (require 'setup-ggtags)
             (require 'setup-cedet)))
 
