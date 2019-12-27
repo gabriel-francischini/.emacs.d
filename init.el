@@ -25,6 +25,13 @@
 (setq use-package-always-ensure t)
 (require 'iso-transl)
 (require 'windmove) ; For S-<arrow keys> window moving
+; Configure S-<arrow keys> for real terminal mode
+;(windmove-default-keybindings 'control)
+;(define-key input-decode-map "?\x1B[[D" [S-left])
+;(define-key input-decode-map "?\x1B[[C" [S-right])
+;(define-key input-decode-map "?\e[[A" [S-up])
+;(define-key input-decode-map "?\e[[B" [S-down])
+
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 (let ((default-directory  "~/.emacs.d/custom/"))
