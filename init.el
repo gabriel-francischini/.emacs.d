@@ -365,3 +365,8 @@ This function is suitable to add to `find-file-hook'."
       org-fontify-done-headline t
       org-fontify-quote-and-verse-blocks t)
 
+;; Configures Python Mode
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq python-indent 4)))
+
