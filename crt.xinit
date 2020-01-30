@@ -1,0 +1,8 @@
+xrdb -load $HOME/.Xresources
+xsetroot -solid black &
+xterm -g 80x24+0+0 &
+xfce4-terminal &
+terminology &
+cool-retro-term &
+emacs &
+stumpwm
