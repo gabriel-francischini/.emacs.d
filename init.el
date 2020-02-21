@@ -370,3 +370,18 @@ This function is suitable to add to `find-file-hook'."
           (lambda ()
             (setq python-indent 4)))
 
+;; The following are configs that should be enabled if I desire
+;; to record a video
+
+;; ;; Adds the scrollbar, menu and tool bar
+;; (scroll-bar-mode 1)
+;; (menu-bar-mode 1)
+;; (tool-bar-mode 1)
+;; (scroll-bar-mode)
+;; (menu-bar-mode)
+;; (tool-bar-mode)
+
+;; ;; Changes the font size/height to a adequate size for Mobile Devices
+;; (set-face-attribute 'default nil :height 250)
+
+
